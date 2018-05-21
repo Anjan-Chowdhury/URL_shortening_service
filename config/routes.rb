@@ -53,4 +53,13 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+
+  resources :shorted_urls
+  root to: 'shorted_urls#new'
+  #get '/:short_url', to: "shorted_urls#show"
+  #get 'shorted/:shot_url', to: "shorted_urls#clear", as: "clear"
+  post '/shorted_urls/create'
+  get  '/shorted_urls/fetch_origin_url'
+  get "/shorted_urls/url_stat"
+
 end

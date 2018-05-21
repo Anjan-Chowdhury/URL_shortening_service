@@ -29,9 +29,9 @@ class StoredUrl < ActiveRecord::Base
   end
 
   def cleaning_url
-  	self.original_url.strip!
-  	self.purify_url = self.original_url.downcase.gsub(/(https?:\/\/)|(www\.)/, "")
-  	self.purify_url = "http://#{self.purify_url}"
+  	self.original_url.strip
+  	#self.purify_url = self.original_url.downcase.gsub(/(https?:\/\/)|(www\.)/, "")
+  	self.purify_url = "http://#{self.original_url.downcase.gsub(/(https?:\/\/)|(www\.)/, "")}"
   end
 
 

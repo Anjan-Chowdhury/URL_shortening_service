@@ -1,0 +1,24 @@
+<head>
+  <title>ALL URLS</title>
+</head>
+<body>
+	<center>
+  		<h2>ALL URLS</h1>
+  		<p><%= link_to "Create short url", root_path %></p>
+  	</center>
+  <table style="width:100%">
+<th>ID</th>
+<th>Original Url</th>
+<th>Short Url </th>
+<th>Count Of View </th>
+<% @urls.each do |u| %>
+<tr align = "center">
+	<td><%= u.id %></td>
+  <td><%= u.original_url %></td>
+	<td><%= u.short_url %></td>
+  <td><%= u.url_infos.count %></td>
+	<td><button><%= link_to "CHECK", shorted_url_path(id: u.id) %></button></td>
+</tr>
+<% end %>
+</table>
+</body>

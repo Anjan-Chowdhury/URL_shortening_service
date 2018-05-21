@@ -1,0 +1,38 @@
+</head>
+<body>
+	<center>
+  		<h1>Statistics</h1>
+  		<p><%= link_to "Create short url", new_shorted_url_path %></p>
+      <p><%= link_to "List of url", shorted_urls_path %></p>
+  	</center>
+  <table style="width:100%">
+<th>ID</th>
+<th>Original Url</th>
+<th>Short Url </th>
+<th>Total views </th>
+<tr align = "center">
+	<td><%= @url.id %></td>
+	<td><%= @url.original_url %></td>
+  <td><a href=/u/<%= @url.short_url %>>https://<%= request.host %>/u/<%= @url.short_url %></a></td>
+	<td><%= @url.url_infos.count %></td>
+</tr>
+</table>
+<p> </p>
+<p> </p>
+<table style="width:100%">
+  <th>Sr.no</th>
+  <th>User IP</th>
+  <th>View at</th>
+  <th>Browser Info</th>
+  <th>Browser platform</th>
+  <% @url.url_infos.each_with_index do |u, index| %>
+    <tr>
+      <td><%= index +1 %></td>
+       <td><%= u.host %></td>
+      <td><%= u.created_at %></td>
+      <td><%= u.browser_info %></td>
+      <td><%= u.browser_platform %></td>
+      </tr>
+  <% end %>
+</table>
+</body>

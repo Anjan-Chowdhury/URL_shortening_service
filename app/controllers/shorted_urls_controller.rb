@@ -13,11 +13,10 @@ class ShortedUrlsController < ApplicationController
 
 	def show
 		@url = StoredUrl.find_by_id(params[:id])
-		if @url
+		if @url.present?
 			@url_host = request.remote_ip
 		   GetStat.new(@url_host, browser, @url).call
-		end   
-		redirect_to root_path
+		end
 	end
 
 	def url_stat
@@ -28,14 +27,13 @@ class ShortedUrlsController < ApplicationController
 		@url = StoredUrl.new
 		@url.original_url = params[:original_url]
 		@url.cleaning_url
-
 		if @url.new_url?
 			if @url.save
 				#redirect_to shorted_urls_path(@url.short_url)
-				redirect_to shorted_url_path(@url)
+				redirect_to shorted_urls_path
 			else
 				flash[:error] = "somethis wrong here"
-				render 'index'
+				render "new"
 			end
 		else
 			flash[:notice] = "shortend url  already present in your database"

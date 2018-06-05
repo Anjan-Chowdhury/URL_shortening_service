@@ -25,7 +25,7 @@ class ShortedUrlsController < ApplicationController
 
 	def create
 		@url = StoredUrl.new
-		@url.original_url = params[:original_url]
+		@url.original_url = url_params
 		@url.cleaning_url
 		if @url.new_url?
 			if @url.save

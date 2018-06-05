@@ -6,15 +6,17 @@ RSpec.describe ShortedUrlsController, type: :controller do
 	describe "create" do
 		let!(:url) {FactoryGirl.create(:stored_url, :original_url => "facebook.com")}
 		it "positive case" do
-			  
+			  params = { :original_url => "goomo.com"}
 			expect do
-				post :create, original_url: "google.com"
+				post :create, params
 			end.to change(StoredUrl, :count).by(1)
 		end
 
 		it "negative case" do
+
+			params = { :original_url => "google"}
 			expect do
-				post :create, original_url: "google"
+				post :create, params
 			end.to change(StoredUrl, :count).by(0)
 		end
 	end
@@ -41,7 +43,7 @@ RSpec.describe ShortedUrlsController, type: :controller do
 		end
 		it "negative" do
 			get :index
-			expect(assigns(:url)).to eq(nil)
+			expect(assigns(:urls)).not_to eq([url_1])
 		end
 	end
 

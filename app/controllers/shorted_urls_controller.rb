@@ -24,8 +24,7 @@ class ShortedUrlsController < ApplicationController
     end
 
 	def create
-		@url = StoredUrl.new
-		@url.original_url = url_params
+		@url = StoredUrl.new(url_params)
 		@url.cleaning_url
 		if @url.new_url?
 			if @url.save
@@ -63,7 +62,7 @@ class ShortedUrlsController < ApplicationController
 	end
 
 	def url_params
-    	params.require(:url).permit(:original_url)
+    	params.permit(:original_url)
 	end
 
 end
